@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>Registrar Gastos</h1>
+    <form (ngSubmit)="enviarFechas()">
+      <div>
+        <label for="fechaInicio">Fecha Inicio:</label>
+        <input id="fechaInicio" type="date" [(ngModel)]="fechas.fech_ini" name="fechaInicio" required />
+      </div>
+      <div>
+        <label for="fechaFin">Fecha Fin:</label>
+        <input id="fechaFin" type="date" [(ngModel)]="fechas.fech_fina" name="fechaFin" required />
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
+  
+    <!-- Mostrar la tabla de resultados -->
+    <div *ngIf="respuesta?.result?.length > 0; else noData">
+      <table>
+        <thead>
+          <tr>
+            <th>Departamento</th>
+            <th>Monto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of respuesta.result">
+            <td>{{ item.departamento }}</td>
+            <td>{{ item.monto | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Mensaje cuando no hay datos -->
+    <ng-template #noData>
+      <p class="no-data">No hay datos disponibles para mostrar.</p>
+    </ng-template>
+  </div>
+  
